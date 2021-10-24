@@ -22,9 +22,10 @@ public class Slot {
 	@GeneratedValue
 	private Integer slotId;
 	
+	
+	@JoinColumn(name="location_id")  //just give a specific name to the column. If we remove this annotation, then it will be location_location_id
 	@NotNull
 	@ManyToOne  //many slots in one location
-	//@JoinColumn(name="loaction_id")  //just give a specific name to the column. If we remove this annotation, then it will be location_location_id
 	private Location location;
 	
 	@NotNull

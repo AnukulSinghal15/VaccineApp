@@ -14,6 +14,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name= "locations")
 public class Location {
@@ -38,7 +40,8 @@ public class Location {
 	private Agency agency;
 				
 			  //if mapped by not used, then jpa-hibernate will create another table as field is a list.
-	@OneToMany(mappedBy = "location")  //one location, many slots.  
+	@OneToMany(mappedBy = "location")  //one location, many slots. 
+	@JsonIgnore    //jackson will ignore this field when deserializing
 	private List<Slot> slots;
 	
 	public Location() {
@@ -92,6 +95,14 @@ public class Location {
 
 	public void setAgency(Agency agency) {
 		this.agency = agency;
+	}
+
+	public List<Slot> getSlots() {
+		return slots;
+	}
+
+	public void setSlots(List<Slot> slots) {
+		this.slots = slots;
 	}
 
 	@Override
