@@ -1,11 +1,14 @@
 package com.Anukul.Vaccination.VaccinationApp.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -33,6 +36,10 @@ public class Location {
 	
 	@Enumerated(EnumType.STRING)
 	private Agency agency;
+				
+			  //if mapped by not used, then jpa-hibernate will create another table as field is a list.
+	@OneToMany(mappedBy = "location")  //one location, many slots.  
+	private List<Slot> slots;
 	
 	public Location() {
 		
