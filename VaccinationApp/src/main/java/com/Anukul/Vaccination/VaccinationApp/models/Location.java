@@ -2,6 +2,7 @@ package com.Anukul.Vaccination.VaccinationApp.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,10 +15,16 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name= "locations")
+@JsonIdentityInfo(     //will only give primary key if JSON object being recursively called
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property= "locationId"
+)
 public class Location {
 
 	@Id
@@ -40,8 +47,9 @@ public class Location {
 	private Agency agency;
 				
 			  //if mapped by not used, then jpa-hibernate will create another table as field is a list.
-	@OneToMany(mappedBy = "location")  //one location, many slots. 
-	@JsonIgnore    //jackson will ignore this field when deserializing
+	@OneToMany(mappedBy = "location", cascade = CascadeType.ALL)  //one location, many slots. 
+									  //all slots will be deleted if we delte a location. If no cascade, then error as we cannot delete a location without deleting the slots that are referencing this location.
+	//@JsonIgnore    //jackson will ignore this field when deserializing
 	private List<Slot> slots;
 	
 	public Location() {

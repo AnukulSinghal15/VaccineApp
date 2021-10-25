@@ -39,8 +39,8 @@ public class Config {
 			locationObj2.setAgency(Agency.GOVERNMENT);
 			locationObj2.setPincode(110428);
 			
-			locationRepository.save(locationObj1);
-			locationRepository.save(locationObj2);
+//			locationRepository.save(locationObj1);
+//			locationRepository.save(locationObj2);
 			
 			Slot slotObj1= new Slot();
 			slotObj1.setVaccine(Vaccine.COVISHIELD);
@@ -56,8 +56,8 @@ public class Config {
 			slotObj2.setDate(Date.valueOf("2021-10-24"));
 			slotObj2.setCount(38);
 			
-			slotRepository.save(slotObj1);
-			slotRepository.save(slotObj2);
+//			slotRepository.save(slotObj1);
+//			slotRepository.save(slotObj2);
 		};
 	}
 }

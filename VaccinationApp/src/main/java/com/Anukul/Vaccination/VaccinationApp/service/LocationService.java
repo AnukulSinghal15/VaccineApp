@@ -18,4 +18,11 @@ public class LocationService {
 				.orElseThrow();
 	}
 
+	public void deleteLocationById(int locationId) {
+		// TODO Auto-generated method stub
+		locationRepository.deleteById(locationId);
+		
+		
+	}
+
 }
